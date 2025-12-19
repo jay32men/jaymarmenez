@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wedding E-Invitation</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg1:#fbf6f2;
+      --bg2:#f3ebe3;
+      --ink:#2e2a28;
+      --muted:#6f6661;
+      --gold:#b08b5a;
+      --gold2:#8f6a3d;
+      --card:#ffffffcc;
+      --shadow: 0 24px 60px rgba(0,0,0,.10);
+      --shadow2: 0 16px 35px rgba(0,0,0,.10);
+      --radius: 22px;
+      --line: rgba(176,139,90,.35);
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color:var(--ink);
+      background:
+        radial-gradient(900px 500px at 20% 10%, rgba(176,139,90,.16), transparent 60%),
+        radial-gradient(900px 500px at 80% 0%, rgba(143,106,61,.10), transparent 60%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      overflow-x:hidden;
+    }
+
+    /* --- Ambient sparkles --- */
+    .sparkles{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
+      opacity:.9;
+      filter: blur(.1px);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,.65) 0 2px, transparent 3px),
+        radial-gradient(circle at 85% 30%, rgba(255,255,255,.55) 0 2px, transparent 3px),
+        radial-gradient(circle at 40% 70%, rgba(255,255,255,.50) 0 1.8px, transparent 3px),
+        radial-gradient(circle at 70% 78%, rgba(255,255,255,.45) 0 1.6px, transparent 3px);
+      animation: twinkle 6s ease-in-out infinite;
+      mix-blend-mode: soft-light;
+    }
+    @keyframes twinkle{
+      0%,100%{ transform: translateY(0); opacity:.85; }
+      50%{ transform: translateY(-10px); opacity:1; }
+    }
+
+    /* ================= LANDING PAGE (NEW) ================= */
+    body.landingLock{ overflow:hidden; }
+    .landing{
+      position:fixed;
+      inset:0;
+      z-index:200;
+      display:grid;
+      place-items:center;
+      padding: 18px;
+      background:
+        radial-gradient(900px 520px at 30% 20%, rgba(176,139,90,.22), transparent 60%),
+        radial-gradient(900px 520px at 80% 10%, rgba(143,106,61,.14), transparent 60%),
+        linear-gradient(135deg, rgba(251,246,242,.96), rgba(243,235,227,.96));
+      backdrop-filter: blur(6px);
+      transition: opacity .55s ease, transform .55s ease;
+    }
+    .landing.leaving{
+      opacity:0;
+      transform: scale(1.02);
+      pointer-events:none;
+    }
+    .landingCard{
+      width: min(980px, 92vw);
+      border-radius: 28px;
+      border: 1px solid rgba(176,139,90,.25);
+      background: rgba(255,255,255,.68);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .landingGrid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+    }
+    .landingLeft{
+      padding: 40px 36px 36px;
+      position:relative;
+    }
+    .landingLeft:before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(520px 280px at 15% 18%, rgba(176,139,90,.18), transparent 60%),
+        radial-gradient(560px 300px at 80% 10%, rgba(143,106,61,.10), transparent 60%);
+      pointer-events:none;
+    }
+    .landingLeft > *{ position:relative; z-index:1; }
+
+    .landingRight{
+      min-height: 440px;
+      position:relative;
+      background:
+        linear-gradient(135deg, rgba(176,139,90,.18), rgba(255,255,255,.20)),
+        radial-gradient(800px 420px at 50% 40%, rgba(255,255,255,.55), transparent 55%),
+        linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.18));
+    }
+    .landingRight:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(240px 220px at 30% 30%, rgba(255,255,255,.40), transparent 60%),
+        radial-gradient(260px 240px at 70% 55%, rgba(255,255,255,.30), transparent 60%);
+      mix-blend-mode: soft-light;
+      opacity:.9;
+      pointer-events:none;
+    }
+    .landingBadge{
+      position:absolute;
+      left:18px; right:18px; bottom:18px;
+      padding: 14px 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.74);
+      border: 1px solid rgba(176,139,90,.25);
+      backdrop-filter: blur(10px);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
+    .landingTitle{
+      font-family:"Playfair Display", serif;
+      font-size: 44px;
+      line-height: 1.05;
+      margin: 0;
+    }
+    .landingSub{
+      margin-top: 10px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+    .landingMini{
+      margin-top: 18px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .landingMini .pill{ cursor:default; }
+    @media (max-width: 900px){
+      .landingGrid{ grid-template-columns:1fr; }
+      .landingRight{ min-height: 260px; }
+      .landingTitle{ font-size: 38px; }
+    }
+
+    /* Magic canvas (NEW) */
+    #magicCanvas{
+      position:fixed;
+      inset:0;
+      z-index:220;
+      pointer-events:none;
+    }
+
+    /* --- Top nav (floating) --- */
+    .nav{
+      position:fixed;
+      top:18px; left:50%;
+      transform:translateX(-50%);
+      width:min(1050px, 92vw);
+      z-index:50;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 14px;
+      border:1px solid rgba(176,139,90,.25);
+      background: rgba(255,255,255,.65);
+      backdrop-filter: blur(10px);
+      border-radius: 999px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.07);
+      transition: transform .35s ease, background .35s ease, box-shadow .35s ease;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      padding:6px 10px;
+    }
+    .brand .mark{
+      width:34px; height:34px;
+      border-radius:999px;
+      border:1px solid rgba(176,139,90,.35);
+      background: radial-gradient(circle at 30% 30%, rgba(176,139,90,.25), transparent 70%);
+      display:grid; place-items:center;
+      box-shadow: inset 0 0 0 6px rgba(255,255,255,.55);
+    }
+    .brand strong{
+      font-family: "Playfair Display", serif;
+      letter-spacing:.2px;
+    }
+    .nav a{
+      text-decoration:none;
+      color:var(--muted);
+      font-size:13px;
+      padding:10px 12px;
+      border-radius:999px;
+      transition: all .25s ease;
+      position:relative;
+    }
+    .nav a:hover{
+      color:var(--ink);
+      background: rgba(176,139,90,.12);
+      transform: translateY(-1px);
+    }
+    .nav .cta{
+      color:white;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      box-shadow: 0 12px 26px rgba(176,139,90,.25);
+      border:1px solid rgba(255,255,255,.35);
+    }
+    .nav .cta:hover{
+      filter: brightness(1.02);
+      transform: translateY(-2px);
+      box-shadow: 0 16px 32px rgba(176,139,90,.28);
+    }
+
+    /* --- Layout --- */
+    .wrap{ position:relative; z-index:1; }
+    section{
+      width:min(1100px, 92vw);
+      margin:0 auto;
+      padding: 92px 0;
+    }
+    .grid{
+      display:grid;
+      gap:22px;
+    }
+    .two{ grid-template-columns: 1.1fr .9fr; }
+    .three{ grid-template-columns: repeat(3, 1fr); }
+    @media (max-width: 900px){
+      .two, .three{ grid-template-columns:1fr; }
+      .nav{ gap:8px; }
+      .nav .links{ display:none; } /* keep it clean on mobile */
+    }
+
+    /* --- Shared card --- */
+    .card{
+      background: var(--card);
+      border: 1px solid rgba(176,139,90,.20);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow2);
+      backdrop-filter: blur(10px);
+      overflow:hidden;
+      transform: translateY(14px);
+      opacity:0;
+      transition: transform .8s cubic-bezier(.2,.8,.2,1), opacity .8s ease;
+    }
+    .card.show{
+      transform: translateY(0);
+      opacity:1;
+    }
+    .card .pad{ padding:26px; }
+
+    /* --- Headings --- */
+    .kicker{
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: var(--gold2);
+      margin-bottom: 10px;
+    }
+    h1,h2{
+      font-family:"Playfair Display", serif;
+      margin:0;
+    }
+    h1{
+      font-size: 52px;
+      line-height:1.05;
+    }
+    h2{
+      font-size: 36px;
+    }
+    .script{
+      font-family: "Great Vibes", cursive;
+      font-size: 52px;
+      color: var(--gold2);
+      line-height:1;
+      margin: 10px 0 6px;
+      text-shadow: 0 10px 25px rgba(176,139,90,.20);
+    }
+    p{ margin:0; color:var(--muted); line-height:1.7; }
+
+    /* ========== SCENARIO 2: HERO (scroll-up with pictures & schedule) ========== */
+    .hero{
+      padding-top: 135px;
+      padding-bottom: 70px;
+    }
+    .heroCard{
+      border-radius: 28px;
+      overflow:hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(176,139,90,.22);
+      background: rgba(255,255,255,.60);
+    }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:0;
+    }
+    .heroLeft{
+      padding: 34px 34px 32px;
+      position:relative;
+    }
+    .heroLeft:before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(450px 220px at 15% 10%, rgba(176,139,90,.18), transparent 60%),
+        radial-gradient(520px 280px at 75% 5%, rgba(143,106,61,.11), transparent 60%);
+      pointer-events:none;
+    }
+    .heroLeft > *{ position:relative; z-index:1; }
+
+    .pillRow{
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin: 18px 0 22px;
+    }
+    .pill{
+      font-size:13px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(176,139,90,.28);
+      background: rgba(255,255,255,.55);
+      transition: transform .25s ease, background .25s ease;
+    }
+    .pill:hover{ transform: translateY(-2px); background: rgba(176,139,90,.12); }
+
+    .btnRow{ display:flex; gap:12px; flex-wrap:wrap; margin-top:22px; }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(176,139,90,.35);
+      background: rgba(255,255,255,.75);
+      color: var(--ink);
+      text-decoration:none;
+      font-size:14px;
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+      cursor:pointer;
+    }
+    .btn:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 14px 26px rgba(0,0,0,.10);
+      background: rgba(176,139,90,.10);
+    }
+    .btn.primary{
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      color:white;
+      border: 1px solid rgba(255,255,255,.35);
+      box-shadow: 0 14px 28px rgba(176,139,90,.22);
+    }
+    .btn.primary:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 18px 34px rgba(176,139,90,.25);
+    }
+
+    .heroRight{
+      position:relative;
+      min-height: 420px;
+      background:
+        linear-gradient(135deg, rgba(176,139,90,.18), rgba(255,255,255,.2)),
+        url("images/couple-hero.jpg") center/cover no-repeat;
+    }
+    .heroRight:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.22));
+    }
+    .floatCouple{
+      position:absolute;
+      left:18px; bottom:18px;
+      right:18px;
+      padding: 14px 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(176,139,90,.25);
+      backdrop-filter: blur(10px);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      z-index:2;
+      transition: transform .35s ease;
+    }
+    .floatCouple:hover{ transform: translateY(-3px); }
+    .names{
+      font-family:"Playfair Display", serif;
+      font-weight:700;
+      letter-spacing:.3px;
+      font-size:16px;
+    }
+    .dateBadge{
+      font-size:12px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(176,139,90,.30);
+      color: var(--gold2);
+      background: rgba(255,255,255,.7);
+      white-space:nowrap;
+    }
+    @media (max-width:900px){
+      .heroGrid{ grid-template-columns: 1fr; }
+      .heroRight{ min-height: 360px; }
+      h1{ font-size: 42px; }
+    }
+
+    /* Timeline */
+    .timeline{
+      margin-top: 18px;
+      border-top: 1px dashed var(--line);
+      padding-top: 18px;
+      display:grid;
+      gap:12px;
+    }
+    .tItem{
+      display:grid;
+      grid-template-columns: 110px 1fr;
+      gap:14px;
+      padding: 12px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(176,139,90,.18);
+      background: rgba(255,255,255,.60);
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+    .tItem:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 14px 25px rgba(0,0,0,.08);
+      background: rgba(176,139,90,.08);
+    }
+    .tTime{ font-weight:600; color: var(--gold2); font-size:13px; }
+    .tText{ color: var(--muted); font-size:13px; line-height:1.5; }
+
+    /* ========== SCENARIO 1: UNFOLDING SCROLL PAPER ========== */
+    .scrollWrap{
+      display:grid;
+      grid-template-columns: 1fr;
+      place-items:center;
+    }
+    .scroll{
+      width: min(860px, 92vw);
+      border-radius: 26px;
+      position:relative;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(176,139,90,.25);
+      background: rgba(255,255,255,.55);
+      overflow:hidden;
+      transform: translateY(18px);
+      opacity:0;
+      transition: transform .9s cubic-bezier(.2,.8,.2,1), opacity .9s ease;
+    }
+    .scroll.show{ transform: translateY(0); opacity:1; }
+
+    .scrollTop, .scrollBottom{
+      height: 54px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 0 22px;
+      background: linear-gradient(135deg, rgba(176,139,90,.22), rgba(255,255,255,.65));
+      border-bottom: 1px solid rgba(176,139,90,.18);
+    }
+    .scrollBottom{
+      border-top: 1px solid rgba(176,139,90,.18);
+      border-bottom:none;
+      background: linear-gradient(135deg, rgba(255,255,255,.65), rgba(176,139,90,.18));
+    }
+    .roller{
+      width: 64px; height: 18px;
+      border-radius:999px;
+      border:1px solid rgba(176,139,90,.35);
+      background: rgba(255,255,255,.70);
+      box-shadow: inset 0 0 0 6px rgba(176,139,90,.10);
+    }
+    .seal{
+      font-size:12px;
+      color: var(--gold2);
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      opacity:.9;
+    }
+
+    /* Unfold effect */
+    .paper{
+      max-height: 0px;
+      overflow:hidden;
+      transition: max-height 1.25s cubic-bezier(.2,.8,.2,1);
+    }
+    .scroll.open .paper{ max-height: 760px; }
+
+    .paperInner{
+      padding: 30px 34px 34px;
+      background:
+        radial-gradient(700px 280px at 20% 0%, rgba(176,139,90,.14), transparent 60%),
+        radial-gradient(700px 280px at 80% 0%, rgba(143,106,61,.09), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,255,255,.62));
+      position:relative;
+    }
+    .paperInner:before{
+      content:"";
+      position:absolute;
+      inset: 14px;
+      border-radius: 18px;
+      border: 1px dashed rgba(176,139,90,.35);
+      pointer-events:none;
+    }
+
+    .paperContent{
+      position:relative;
+      z-index:1;
+      display:grid;
+      gap:16px;
+      text-align:center;
+    }
+    .paperContent .line{
+      width: 120px; height:2px;
+      background: linear-gradient(90deg, transparent, rgba(176,139,90,.8), transparent);
+      margin: 0 auto;
+    }
+
+    /* ========== SCENARIO 3: CHURCH & RECEPTION ========== */
+    .placeCard{
+      display:grid;
+      grid-template-rows: 220px 1fr;
+    }
+    .img{
+      position:relative;
+      overflow:hidden;
+    }
+    .img img{
+      width:100%; height:100%;
+      object-fit:cover;
+      transform: scale(1.02);
+      transition: transform .65s ease;
+      display:block;
+    }
+    .placeCard:hover .img img{ transform: scale(1.10); }
+    .img:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.25));
+      opacity:.85;
+      transition: opacity .35s ease;
+    }
+    .placeCard:hover .img:after{ opacity:.65; }
+
+    .tag{
+      position:absolute;
+      top:14px; left:14px;
+      z-index:2;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(176,139,90,.28);
+      font-size: 12px;
+      color: var(--gold2);
+      backdrop-filter: blur(10px);
+      transition: transform .35s ease;
+    }
+    .placeCard:hover .tag{ transform: translateY(-2px); }
+
+    /* ========== SCENARIO 4: PRENUP GALLERY + MODAL ========== */
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:16px;
+    }
+    @media (max-width: 900px){
+      .gallery{ grid-template-columns: 1fr; }
+    }
+    .shot{
+      position:relative;
+      border-radius: 22px;
+      overflow:hidden;
+      border: 1px solid rgba(176,139,90,.22);
+      box-shadow: var(--shadow2);
+      cursor:pointer;
+      transform: translateY(10px);
+      opacity:0;
+      transition: transform .8s cubic-bezier(.2,.8,.2,1), opacity .8s ease, box-shadow .25s ease;
+    }
+    .shot.show{ transform: translateY(0); opacity:1; }
+    .shot:hover{
+      box-shadow: 0 22px 50px rgba(0,0,0,.16);
+    }
+    .shot img{
+      width:100%;
+      height: 280px;
+      object-fit:cover;
+      display:block;
+      transform: scale(1.02);
+      transition: transform .7s ease, filter .35s ease;
+    }
+    .shot:hover img{
+      transform: scale(1.12);
+      filter: contrast(1.02) saturate(1.05);
+    }
+    .shot .cap{
+      position:absolute;
+      left:14px; right:14px; bottom:14px;
+      padding: 10px 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.75);
+      border: 1px solid rgba(176,139,90,.25);
+      backdrop-filter: blur(10px);
+      font-size: 13px;
+      color: var(--muted);
+      transform: translateY(6px);
+      opacity:.0;
+      transition: transform .35s ease, opacity .35s ease;
+    }
+    .shot:hover .cap{
+      transform: translateY(0);
+      opacity:1;
+    }
+
+    /* Modal */
+    .modal{
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+      z-index:100;
+    }
+    .modal.open{ display:flex; }
+    .modalCard{
+      width: min(980px, 96vw);
+      border-radius: 22px;
+      overflow:hidden;
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(255,255,255,.35);
+      box-shadow: 0 30px 80px rgba(0,0,0,.30);
+      transform: scale(.98);
+      opacity:0;
+      transition: all .25s ease;
+    }
+    .modal.open .modalCard{
+      transform: scale(1);
+      opacity:1;
+    }
+    .modalImg{
+      width:100%;
+      max-height: 72vh;
+      object-fit:cover;
+      display:block;
+    }
+    .modalBar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding: 12px 14px;
+      border-top: 1px solid rgba(176,139,90,.18);
+    }
+    .closeBtn{
+      border:none;
+      border-radius: 999px;
+      padding: 10px 14px;
+      background: rgba(176,139,90,.14);
+      cursor:pointer;
+      transition: transform .2s ease, background .2s ease;
+    }
+    .closeBtn:hover{ transform: translateY(-1px); background: rgba(176,139,90,.20); }
+
+    /* ========== SCENARIO 5: SPONSORS + FAQ ========== */
+    .list{
+      display:grid;
+      gap:10px;
+      margin-top: 14px;
+    }
+    .person{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding: 14px 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(176,139,90,.18);
+      background: rgba(255,255,255,.65);
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+    .person:hover{
+      transform: translateY(-2px);
+      background: rgba(176,139,90,.08);
+      box-shadow: 0 14px 24px rgba(0,0,0,.08);
+    }
+    .person .role{
+      font-size:12px;
+      color: var(--gold2);
+      border:1px solid rgba(176,139,90,.30);
+      background: rgba(255,255,255,.7);
+      padding: 7px 10px;
+      border-radius: 999px;
+      white-space:nowrap;
+    }
+
+    .faq{
+      margin-top: 14px;
+      display:grid;
+      gap:10px;
+    }
+    details{
+      border-radius: 18px;
+      border: 1px solid rgba(176,139,90,.18);
+      background: rgba(255,255,255,.65);
+      padding: 12px 14px;
+      transition: background .25s ease, transform .25s ease;
+      overflow:hidden;
+    }
+    details:hover{ background: rgba(176,139,90,.08); transform: translateY(-1px); }
+    summary{
+      cursor:pointer;
+      font-weight:600;
+      color: var(--ink);
+      list-style:none;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    .chev{
+      width:26px; height:26px;
+      border-radius:999px;
+      display:grid; place-items:center;
+      border:1px solid rgba(176,139,90,.25);
+      background: rgba(255,255,255,.7);
+      transition: transform .25s ease;
+    }
+    details[open] .chev{ transform: rotate(180deg); }
+    details p{ margin-top:10px; }
+
+    /* Footer */
+    footer{
+      width:min(1100px, 92vw);
+      margin:0 auto;
+      padding: 0 0 70px;
+      color: var(--muted);
+      text-align:center;
+    }
+
+    /* little floating hearts */
+    .floatHearts{
+      position:absolute;
+      inset:auto 0 -40px 0;
+      height:0;
+      pointer-events:none;
+      opacity:.8;
+    }
+    .heart{
+      position:absolute;
+      left: var(--x);
+      bottom: 0;
+      font-size: 18px;
+      filter: drop-shadow(0 8px 12px rgba(0,0,0,.12));
+      animation: rise var(--dur) ease-in-out infinite;
+      opacity:.0;
+    }
+    @keyframes rise{
+      0%{ transform: translateY(0) scale(.95); opacity:0; }
+      20%{ opacity:.9; }
+      100%{ transform: translateY(-140px) scale(1.15); opacity:0; }
+    }
+  </style>
+</head>
+
+<body class="landingLock">
+  <div class="sparkles"></div>
+
+  <!-- Magic canvas for click burst (NEW) -->
+  <canvas id="magicCanvas"></canvas>
+
+  <!-- LANDING PAGE (NEW) -->
+  <div class="landing" id="landing" aria-label="Landing page">
+    <div class="landingCard">
+      <div class="landingGrid">
+        <div class="landingLeft">
+          <div class="kicker">Wedding E-Invitation</div>
+          <h1 class="landingTitle">A Fairytale Awaits ✨</h1>
+          <div class="script" style="margin-top:12px;">You’re Invited</div>
+          <p class="landingSub">
+            Tap the button below to open the official invitation — with a little magic.
+          </p>
+
+          <div class="landingMini">
+            <div class="pill">📅 March 14, 2026</div>
+            <div class="pill">📍 City, Country</div>
+            <div class="pill">👗 Garden Formal</div>
+          </div>
+
+          <div class="btnRow" style="margin-top:22px;">
+            <button class="btn primary" id="enterBtn" type="button">Open Invitation ✨</button>
+            <button class="btn" id="peekBtn" type="button">Quick Peek 👀</button>
+          </div>
+
+          <p style="margin-top:14px; font-size:12px; color:var(--muted); opacity:.9;">
+            Tip: Works best on mobile — tap anywhere after opening to scroll.
+          </p>
+        </div>
+
+        <div class="landingRight" aria-hidden="true">
+          <div class="landingBadge">
+            <div>
+              <div class="names">Groom Name & Bride Name</div>
+              <div style="font-size:12px; color:var(--muted); margin-top:3px;">
+                “And so, the adventure begins…”
+              </div>
+            </div>
+            <div class="dateBadge">March 14, 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT WRAP (your original code; not removed) -->
+  <div id="mainContent" style="display:none;">
+    <!-- Floating Nav -->
+    <div class="nav" id="nav">
+      <div class="brand">
+        <div class="mark">✨</div>
+        <strong>Our Fairytale</strong>
+      </div>
+
+      <div class="links">
+        <a href="#scroll">Invitation</a>
+        <a href="#couple">Couple</a>
+        <a href="#places">Venue</a>
+        <a href="#prenup">Prenup</a>
+        <a href="#sponsors">Sponsors & FAQ</a>
+      </div>
+
+      <a class="cta" href="#rsvp">RSVP</a>
+    </div>
+
+    <div class="wrap">
+
+      <!-- SCENARIO 2: Couple Hero -->
+      <section class="hero" id="couple">
+        <div class="heroCard card show" style="opacity:1; transform:none;">
+          <div class="heroGrid">
+            <div class="heroLeft">
+              <div class="kicker">A fairytale begins</div>
+              <h1>Join us as we say</h1>
+              <div class="script">I do</div>
+              <p>
+                With grateful hearts, we invite you to witness the union of
+                <b>Groom Name</b> and <b>Bride Name</b> — a celebration of love,
+                family, and forever.
+              </p>
+
+              <div class="pillRow">
+                <div class="pill">📍 City, Country</div>
+                <div class="pill">📅 March 14, 2026</div>
+                <div class="pill">👗 Garden Formal</div>
+              </div>
+
+              <div class="timeline">
+                <div class="tItem">
+                  <div class="tTime">2:30 PM</div>
+                  <div class="tText"><b>Guest Arrival</b><br/>A gentle welcome with light refreshments.</div>
+                </div>
+                <div class="tItem">
+                  <div class="tTime">3:30 PM</div>
+                  <div class="tText"><b>Wedding Ceremony</b><br/>A promise under heaven’s grace.</div>
+                </div>
+                <div class="tItem">
+                  <div class="tTime">5:30 PM</div>
+                  <div class="tText"><b>Reception</b><br/>Dinner, toasts, and dancing until starlight.</div>
+                </div>
+              </div>
+
+              <div class="btnRow">
+                <a class="btn primary" href="#scroll">Open Invitation ✨</a>
+                <a class="btn" href="#places">See Venue 📍</a>
+              </div>
+            </div>
+
+            <div class="heroRight">
+              <div class="floatCouple">
+                <div>
+                  <div class="names">Groom Name & Bride Name</div>
+                  <div style="font-size:12px; color:var(--muted); margin-top:3px;">
+                    “And so, the adventure begins…”
+                  </div>
+                </div>
+                <div class="dateBadge">March 14, 2026</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="floatHearts" aria-hidden="true">
+          <div class="heart" style="--x:10%;--dur:5.5s;">💛</div>
+          <div class="heart" style="--x:30%;--dur:6.3s;">🤍</div>
+          <div class="heart" style="--x:55%;--dur:5.9s;">💛</div>
+          <div class="heart" style="--x:78%;--dur:6.7s;">🤍</div>
+        </div>
+      </section>
+
+      <!-- SCENARIO 1: Scroll paper unfolding -->
+      <section id="scroll">
+        <div class="scrollWrap">
+          <div class="scroll" id="paperScroll">
+            <div class="scrollTop">
+              <div class="roller"></div>
+              <div class="seal">INVITATION</div>
+              <div class="roller"></div>
+            </div>
+
+            <div class="paper">
+              <div class="paperInner">
+                <div class="paperContent">
+                  <div class="kicker">With love and joy</div>
+                  <h2>You are warmly invited</h2>
+                  <div class="line"></div>
+                  <p>
+                    to celebrate the wedding of<br/>
+                    <span style="font-family:'Playfair Display',serif; font-weight:700; color:var(--ink);">
+                      Groom Name
+                    </span>
+                    <span style="color:var(--gold2); font-weight:600;">&</span>
+                    <span style="font-family:'Playfair Display',serif; font-weight:700; color:var(--ink);">
+                      Bride Name
+                    </span>
+                  </p>
+                  <p style="margin-top:6px;">
+                    Saturday • March 14, 2026<br/>
+                    Ceremony begins at 3:30 PM
+                  </p>
+
+                  <div class="line" style="width:160px;"></div>
+
+                  <p>
+                    “Love is patient, love is kind…”<br/>
+                    <span style="font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold2);">
+                      1 Corinthians 13:4
+                    </span>
+                  </p>
+
+                  <div class="btnRow" style="justify-content:center;">
+                    <a class="btn primary" href="#rsvp">RSVP 💌</a>
+                    <a class="btn" href="#prenup">View Prenup 📸</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="scrollBottom">
+              <div class="roller"></div>
+              <div class="seal">SCROLL TO UNFOLD ✨</div>
+              <div class="roller"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCENARIO 3: Church & Reception -->
+      <section id="places">
+        <div class="grid two">
+          <div class="card placeCard">
+            <div class="img">
+              <div class="tag">⛪ Ceremony</div>
+              <img src="images/church.jpg" alt="Church">
+            </div>
+            <div class="pad">
+              <div class="kicker">Church</div>
+              <h2 style="font-size:28px;">St. Example Parish</h2>
+              <p style="margin-top:10px;">
+                Address line here, City. Please arrive 30 minutes early.
+              </p>
+              <div class="btnRow" style="margin-top:14px;">
+                <a class="btn" target="_blank" href="https://maps.google.com">Open Map 🗺️</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card placeCard">
+            <div class="img">
+              <div class="tag">🥂 Reception</div>
+              <img src="images/reception.jpg" alt="Reception">
+            </div>
+            <div class="pad">
+              <div class="kicker">Reception</div>
+              <h2 style="font-size:28px;">The Grand Manor</h2>
+              <p style="margin-top:10px;">
+                Dinner, speeches, and dancing under the night sky.
+              </p>
+              <div class="btnRow" style="margin-top:14px;">
+                <a class="btn" target="_blank" href="https://maps.google.com">Open Map 🗺️</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCENARIO 4: Prenup Shoot -->
+      <section id="prenup">
+        <div class="card">
+          <div class="pad">
+            <div class="kicker">Our story in frames</div>
+            <h2>Prenup Shoot</h2>
+            <p style="margin-top:10px;">
+              A few moments from our little fairytale — captured before the forever begins.
+            </p>
+
+            <div class="gallery" style="margin-top:18px;">
+              <div class="shot" data-full="images/prenup1.jpg">
+                <img src="images/prenup1.jpg" alt="Prenup 1">
+                <div class="cap">Golden hour promises ✨</div>
+              </div>
+              <div class="shot" data-full="images/prenup2.jpg">
+                <img src="images/prenup2.jpg" alt="Prenup 2">
+                <div class="cap">A quiet kind of forever 🤍</div>
+              </div>
+              <div class="shot" data-full="images/prenup3.jpg">
+                <img src="images/prenup3.jpg" alt="Prenup 3">
+                <div class="cap">Where our hearts meet 💛</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCENARIO 5: Sponsors + FAQs -->
+      <section id="sponsors">
+        <div class="grid two">
+          <div class="card">
+            <div class="pad">
+              <div class="kicker">With guidance & love</div>
+              <h2>Principal Sponsors</h2>
+              <p style="margin-top:10px;">Honoring those who stand with us in this new chapter.</p>
+
+              <div class="list">
+                <div class="person">
+                  <div><b>Mr. Sponsor Name</b><div style="font-size:12px;color:var(--muted);margin-top:2px;">(Ninong)</div></div>
+                  <div class="role">Sponsor</div>
+                </div>
+                <div class="person">
+                  <div><b>Mrs. Sponsor Name</b><div style="font-size:12px;color:var(--muted);margin-top:2px;">(Ninang)</div></div>
+                  <div class="role">Sponsor</div>
+                </div>
+                <div class="person">
+                  <div><b>Mr. Sponsor Name</b><div style="font-size:12px;color:var(--muted);margin-top:2px;">(Ninong)</div></div>
+                  <div class="role">Sponsor</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="pad">
+              <div class="kicker">Helpful notes</div>
+              <h2>FAQs</h2>
+
+              <div class="faq">
+                <details>
+                  <summary>
+                    What is the dress code?
+                    <span class="chev">⌄</span>
+                  </summary>
+                  <p>Garden Formal / Semi-Formal. Neutral and pastel tones are encouraged ✨</p>
+                </details>
+
+                <details>
+                  <summary>
+                    Can I bring a plus one?
+                    <span class="chev">⌄</span>
+                  </summary>
+                  <p>Please refer to your invitation. Due to limited seating, we can only accommodate listed guests.</p>
+                </details>
+
+                <details>
+                  <summary>
+                    Are kids allowed?
+                    <span class="chev">⌄</span>
+                  </summary>
+                  <p>We love your little ones, but we’re keeping it intimate. Kindly understand 🤍</p>
+                </details>
+
+                <details>
+                  <summary>
+                    Is there parking available?
+                    <span class="chev">⌄</span>
+                  </summary>
+                  <p>Yes. The reception venue has a dedicated parking area with attendants.</p>
+                </details>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RSVP -->
+      <section id="rsvp">
+        <div class="card">
+          <div class="pad" style="text-align:center;">
+            <div class="kicker">RSVP</div>
+            <h2>We can’t wait to celebrate with you</h2>
+            <p style="margin-top:10px;">Tap below to confirm your attendance.</p>
+
+            <div class="btnRow" style="justify-content:center; margin-top:18px;">
+              <a class="btn primary" href="https://forms.gle/" target="_blank">RSVP via Google Form 💌</a>
+              <a class="btn" href="mailto:youremail@email.com?subject=Wedding RSVP">Email RSVP ✉️</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <p style="margin-bottom:8px;">Made with love ✨</p>
+        <p style="font-size:12px;">© 2026 Groom Name & Bride Name</p>
+      </footer>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+      <div class="modalCard">
+        <img class="modalImg" id="modalImg" alt="Preview">
+        <div class="modalBar">
+          <div style="color:var(--muted);font-size:13px;">Tap outside or close to exit</div>
+          <button class="closeBtn" id="closeBtn">Close ✕</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ================== MAGIC EFFECT (NEW) ==================
+    const canvas = document.getElementById('magicCanvas');
+    const ctx = canvas.getContext('2d');
+    let W = 0, H = 0;
+
+    function resizeCanvas(){
+      W = canvas.width = window.innerWidth * devicePixelRatio;
+      H = canvas.height = window.innerHeight * devicePixelRatio;
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
+      ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const particles = [];
+    function rand(min,max){ return Math.random()*(max-min)+min; }
+
+    function burst(x, y){
+      const count = 70;
+      for(let i=0;i<count;i++){
+        const a = rand(0, Math.PI*2);
+        const s = rand(2.2, 6.5);
+        particles.push({
+          x, y,
+          vx: Math.cos(a)*s,
+          vy: Math.sin(a)*s - rand(1.5, 4.0),
+          g: rand(0.06, 0.12),
+          r: rand(1.2, 2.6),
+          life: rand(40, 70),
+          t: 0,
+          hue: rand(38, 52),   // warm gold range
+          alpha: rand(0.7, 1.0)
+        });
+      }
+    }
+
+    function draw(){
+      ctx.clearRect(0,0,window.innerWidth, window.innerHeight);
+
+      for(let i=particles.length-1;i>=0;i--){
+        const p = particles[i];
+        p.t++;
+        p.vy += p.g;
+        p.x += p.vx;
+        p.y += p.vy;
+
+        const fade = 1 - (p.t / p.life);
+        const a = Math.max(0, fade) * p.alpha;
+
+        // glow
+        ctx.save();
+        ctx.globalAlpha = a;
+        ctx.beginPath();
+        ctx.fillStyle = `hsla(${p.hue}, 65%, 60%, ${a})`;
+        ctx.shadowColor = `hsla(${p.hue}, 75%, 60%, ${a})`;
+        ctx.shadowBlur = 14;
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+        ctx.fill();
+        ctx.restore();
+
+        if(p.t >= p.life) particles.splice(i,1);
+      }
+
+      requestAnimationFrame(draw);
+    }
+    draw();
+
+    // ================== LANDING LOGIC (NEW) ==================
+    const landing = document.getElementById('landing');
+    const mainContent = document.getElementById('mainContent');
+    const enterBtn = document.getElementById('enterBtn');
+    const peekBtn = document.getElementById('peekBtn');
+
+    function openInvitation(targetId){
+      const rect = enterBtn.getBoundingClientRect();
+      const x = rect.left + rect.width/2;
+      const y = rect.top + rect.height/2;
+
+      // magic burst (center + a couple extra bursts)
+      burst(x, y);
+      setTimeout(()=>burst(x-40, y+10), 80);
+      setTimeout(()=>burst(x+50, y-15), 140);
+
+      landing.classList.add('leaving');
+
+      setTimeout(()=>{
+        landing.style.display = "none";
+        mainContent.style.display = "block";
+        document.body.classList.remove('landingLock');
+
+        // smooth jump to section
+        const el = document.querySelector(targetId);
+        if(el) el.scrollIntoView({ behavior:"smooth", block:"start" });
+      }, 520);
+    }
+
+    enterBtn.addEventListener('click', ()=> openInvitation('#scroll'));
+    peekBtn.addEventListener('click', ()=>{
+      // small magic + open to hero section
+      const r = peekBtn.getBoundingClientRect();
+      burst(r.left + r.width/2, r.top + r.height/2);
+      openInvitation('#couple');
+    });
+
+    // ================== YOUR ORIGINAL SCRIPT (kept) ==================
+
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add('show');
+        }
+      })
+    }, { threshold: 0.18 });
+
+    document.querySelectorAll('.card, .scroll, .shot').forEach(el => observer.observe(el));
+
+    // Scenario 1: Unfold scroll paper when visible
+    const scrollEl = document.getElementById('paperScroll');
+    const unfoldObs = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          scrollEl.classList.add('open');
+        }
+      })
+    }, { threshold: 0.35 });
+    unfoldObs.observe(scrollEl);
+
+    // Modal for prenup shots
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modalImg');
+    const closeBtn = document.getElementById('closeBtn');
+
+    document.querySelectorAll('.shot').forEach(s=>{
+      s.addEventListener('click', ()=>{
+        const src = s.getAttribute('data-full');
+        modalImg.src = src;
+        modal.classList.add('open');
+      });
+    });
+
+    const closeModal = ()=> modal.classList.remove('open');
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e)=>{
+      if(e.target === modal) closeModal();
+    });
+
+    // Subtle nav behavior on scroll
+    const nav = document.getElementById('nav');
+    let lastY = window.scrollY;
+    window.addEventListener('scroll', ()=>{
+      const y = window.scrollY;
+      const goingDown = y > lastY;
+      if(nav){
+        nav.style.transform = `translateX(-50%) translateY(${goingDown && y>120 ? -14 : 0}px)`;
+        nav.style.boxShadow = y>60 ? "0 14px 34px rgba(0,0,0,.10)" : "0 10px 30px rgba(0,0,0,.07)";
+      }
+      lastY = y;
+    });
+  </script>
+</body>
+</html>
