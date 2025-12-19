@@ -59,7 +59,7 @@
       50%{ transform: translateY(-10px); opacity:1; }
     }
 
-    /* ================= LANDING PAGE (NEW) ================= */
+    /* ================= LANDING PAGE ================= */
     body.landingLock{ overflow:hidden; }
     .landing{
       position:fixed;
@@ -165,7 +165,7 @@
       .landingTitle{ font-size: 38px; }
     }
 
-    /* Magic canvas (NEW) */
+    /* Magic canvas */
     #magicCanvas{
       position:fixed;
       inset:0;
@@ -250,7 +250,7 @@
     @media (max-width: 900px){
       .two, .three{ grid-template-columns:1fr; }
       .nav{ gap:8px; }
-      .nav .links{ display:none; } /* keep it clean on mobile */
+      .nav .links{ display:none; }
     }
 
     /* --- Shared card --- */
@@ -300,7 +300,7 @@
     }
     p{ margin:0; color:var(--muted); line-height:1.7; }
 
-    /* ========== SCENARIO 2: HERO (scroll-up with pictures & schedule) ========== */
+    /* ========== HERO ========== */
     .hero{
       padding-top: 135px;
       padding-bottom: 70px;
@@ -455,7 +455,7 @@
     .tTime{ font-weight:600; color: var(--gold2); font-size:13px; }
     .tText{ color: var(--muted); font-size:13px; line-height:1.5; }
 
-    /* ========== SCENARIO 1: UNFOLDING SCROLL PAPER ========== */
+    /* ========== UNFOLDING SCROLL PAPER ========== */
     .scrollWrap{
       display:grid;
       grid-template-columns: 1fr;
@@ -504,7 +504,6 @@
       opacity:.9;
     }
 
-    /* Unfold effect */
     .paper{
       max-height: 0px;
       overflow:hidden;
@@ -542,7 +541,7 @@
       margin: 0 auto;
     }
 
-    /* ========== SCENARIO 3: CHURCH & RECEPTION ========== */
+    /* ========== CHURCH & RECEPTION ========== */
     .placeCard{
       display:grid;
       grid-template-rows: 220px 1fr;
@@ -584,7 +583,7 @@
     }
     .placeCard:hover .tag{ transform: translateY(-2px); }
 
-    /* ========== SCENARIO 4: PRENUP GALLERY + MODAL ========== */
+    /* ========== PRENUP GALLERY + MODAL ========== */
     .gallery{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -639,7 +638,6 @@
       opacity:1;
     }
 
-    /* Modal */
     .modal{
       position:fixed;
       inset:0;
@@ -689,75 +687,6 @@
     }
     .closeBtn:hover{ transform: translateY(-1px); background: rgba(176,139,90,.20); }
 
-    /* ========== SCENARIO 5: SPONSORS + FAQ ========== */
-    .list{
-      display:grid;
-      gap:10px;
-      margin-top: 14px;
-    }
-    .person{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding: 14px 14px;
-      border-radius: 18px;
-      border: 1px solid rgba(176,139,90,.18);
-      background: rgba(255,255,255,.65);
-      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
-    }
-    .person:hover{
-      transform: translateY(-2px);
-      background: rgba(176,139,90,.08);
-      box-shadow: 0 14px 24px rgba(0,0,0,.08);
-    }
-    .person .role{
-      font-size:12px;
-      color: var(--gold2);
-      border:1px solid rgba(176,139,90,.30);
-      background: rgba(255,255,255,.7);
-      padding: 7px 10px;
-      border-radius: 999px;
-      white-space:nowrap;
-    }
-
-    .faq{
-      margin-top: 14px;
-      display:grid;
-      gap:10px;
-    }
-    details{
-      border-radius: 18px;
-      border: 1px solid rgba(176,139,90,.18);
-      background: rgba(255,255,255,.65);
-      padding: 12px 14px;
-      transition: background .25s ease, transform .25s ease;
-      overflow:hidden;
-    }
-    details:hover{ background: rgba(176,139,90,.08); transform: translateY(-1px); }
-    summary{
-      cursor:pointer;
-      font-weight:600;
-      color: var(--ink);
-      list-style:none;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-    }
-    summary::-webkit-details-marker{ display:none; }
-    .chev{
-      width:26px; height:26px;
-      border-radius:999px;
-      display:grid; place-items:center;
-      border:1px solid rgba(176,139,90,.25);
-      background: rgba(255,255,255,.7);
-      transition: transform .25s ease;
-    }
-    details[open] .chev{ transform: rotate(180deg); }
-    details p{ margin-top:10px; }
-
-    /* Footer */
     footer{
       width:min(1100px, 92vw);
       margin:0 auto;
@@ -766,7 +695,6 @@
       text-align:center;
     }
 
-    /* little floating hearts */
     .floatHearts{
       position:absolute;
       inset:auto 0 -40px 0;
@@ -794,10 +722,10 @@
 <body class="landingLock">
   <div class="sparkles"></div>
 
-  <!-- Magic canvas for click burst (NEW) -->
+  <!-- Magic canvas -->
   <canvas id="magicCanvas"></canvas>
 
-  <!-- LANDING PAGE (NEW) -->
+  <!-- LANDING -->
   <div class="landing" id="landing" aria-label="Landing page">
     <div class="landingCard">
       <div class="landingGrid">
@@ -840,9 +768,8 @@
     </div>
   </div>
 
-  <!-- MAIN CONTENT WRAP (your original code; not removed) -->
+  <!-- MAIN CONTENT -->
   <div id="mainContent" style="display:none;">
-    <!-- Floating Nav -->
     <div class="nav" id="nav">
       <div class="brand">
         <div class="mark">✨</div>
@@ -862,7 +789,6 @@
 
     <div class="wrap">
 
-      <!-- SCENARIO 2: Couple Hero -->
       <section class="hero" id="couple">
         <div class="heroCard card show" style="opacity:1; transform:none;">
           <div class="heroGrid">
@@ -925,7 +851,6 @@
         </div>
       </section>
 
-      <!-- SCENARIO 1: Scroll paper unfolding -->
       <section id="scroll">
         <div class="scrollWrap">
           <div class="scroll" id="paperScroll">
@@ -982,7 +907,6 @@
         </div>
       </section>
 
-      <!-- SCENARIO 3: Church & Reception -->
       <section id="places">
         <div class="grid two">
           <div class="card placeCard">
@@ -1021,7 +945,6 @@
         </div>
       </section>
 
-      <!-- SCENARIO 4: Prenup Shoot -->
       <section id="prenup">
         <div class="card">
           <div class="pad">
@@ -1049,7 +972,6 @@
         </div>
       </section>
 
-      <!-- SCENARIO 5: Sponsors + FAQs -->
       <section id="sponsors">
         <div class="grid two">
           <div class="card">
@@ -1082,34 +1004,22 @@
 
               <div class="faq">
                 <details>
-                  <summary>
-                    What is the dress code?
-                    <span class="chev">⌄</span>
-                  </summary>
+                  <summary>What is the dress code? <span class="chev">⌄</span></summary>
                   <p>Garden Formal / Semi-Formal. Neutral and pastel tones are encouraged ✨</p>
                 </details>
 
                 <details>
-                  <summary>
-                    Can I bring a plus one?
-                    <span class="chev">⌄</span>
-                  </summary>
+                  <summary>Can I bring a plus one? <span class="chev">⌄</span></summary>
                   <p>Please refer to your invitation. Due to limited seating, we can only accommodate listed guests.</p>
                 </details>
 
                 <details>
-                  <summary>
-                    Are kids allowed?
-                    <span class="chev">⌄</span>
-                  </summary>
+                  <summary>Are kids allowed? <span class="chev">⌄</span></summary>
                   <p>We love your little ones, but we’re keeping it intimate. Kindly understand 🤍</p>
                 </details>
 
                 <details>
-                  <summary>
-                    Is there parking available?
-                    <span class="chev">⌄</span>
-                  </summary>
+                  <summary>Is there parking available? <span class="chev">⌄</span></summary>
                   <p>Yes. The reception venue has a dedicated parking area with attendants.</p>
                 </details>
               </div>
@@ -1118,7 +1028,6 @@
         </div>
       </section>
 
-      <!-- RSVP -->
       <section id="rsvp">
         <div class="card">
           <div class="pad" style="text-align:center;">
@@ -1140,7 +1049,6 @@
       </footer>
     </div>
 
-    <!-- Modal -->
     <div class="modal" id="modal">
       <div class="modalCard">
         <img class="modalImg" id="modalImg" alt="Preview">
@@ -1153,23 +1061,35 @@
   </div>
 
   <script>
-    // ================== MAGIC EFFECT (NEW) ==================
+    // Optional: preload images so first open feels smoother
+    const preload = [
+      "images/couple-hero.jpg",
+      "images/church.jpg",
+      "images/reception.jpg",
+      "images/prenup1.jpg",
+      "images/prenup2.jpg",
+      "images/prenup3.jpg"
+    ];
+    preload.forEach(src => { const i = new Image(); i.src = src; });
+
+    // ================== MAGIC EFFECT ==================
     const canvas = document.getElementById('magicCanvas');
     const ctx = canvas.getContext('2d');
-    let W = 0, H = 0;
+    let dpr = Math.max(1, window.devicePixelRatio || 1);
 
     function resizeCanvas(){
-      W = canvas.width = window.innerWidth * devicePixelRatio;
-      H = canvas.height = window.innerHeight * devicePixelRatio;
+      dpr = Math.max(1, window.devicePixelRatio || 1);
+      canvas.width = Math.floor(window.innerWidth * dpr);
+      canvas.height = Math.floor(window.innerHeight * dpr);
       canvas.style.width = window.innerWidth + "px";
       canvas.style.height = window.innerHeight + "px";
-      ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+      ctx.setTransform(dpr,0,0,dpr,0,0);
     }
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
     const particles = [];
-    function rand(min,max){ return Math.random()*(max-min)+min; }
+    const rand = (min,max)=> Math.random()*(max-min)+min;
 
     function burst(x, y){
       const count = 70;
@@ -1184,7 +1104,7 @@
           r: rand(1.2, 2.6),
           life: rand(40, 70),
           t: 0,
-          hue: rand(38, 52),   // warm gold range
+          hue: rand(38, 52),
           alpha: rand(0.7, 1.0)
         });
       }
@@ -1203,7 +1123,6 @@
         const fade = 1 - (p.t / p.life);
         const a = Math.max(0, fade) * p.alpha;
 
-        // glow
         ctx.save();
         ctx.globalAlpha = a;
         ctx.beginPath();
@@ -1216,23 +1135,21 @@
 
         if(p.t >= p.life) particles.splice(i,1);
       }
-
       requestAnimationFrame(draw);
     }
     draw();
 
-    // ================== LANDING LOGIC (NEW) ==================
+    // ================== LANDING LOGIC ==================
     const landing = document.getElementById('landing');
     const mainContent = document.getElementById('mainContent');
     const enterBtn = document.getElementById('enterBtn');
     const peekBtn = document.getElementById('peekBtn');
 
-    function openInvitation(targetId){
-      const rect = enterBtn.getBoundingClientRect();
+    function openInvitation(targetId, fromRect){
+      const rect = fromRect || enterBtn.getBoundingClientRect();
       const x = rect.left + rect.width/2;
       const y = rect.top + rect.height/2;
 
-      // magic burst (center + a couple extra bursts)
       burst(x, y);
       setTimeout(()=>burst(x-40, y+10), 80);
       setTimeout(()=>burst(x+50, y-15), 140);
@@ -1244,23 +1161,19 @@
         mainContent.style.display = "block";
         document.body.classList.remove('landingLock');
 
-        // smooth jump to section
         const el = document.querySelector(targetId);
         if(el) el.scrollIntoView({ behavior:"smooth", block:"start" });
       }, 520);
     }
 
-    enterBtn.addEventListener('click', ()=> openInvitation('#scroll'));
+    enterBtn.addEventListener('click', ()=> openInvitation('#scroll', enterBtn.getBoundingClientRect()));
     peekBtn.addEventListener('click', ()=>{
-      // small magic + open to hero section
       const r = peekBtn.getBoundingClientRect();
       burst(r.left + r.width/2, r.top + r.height/2);
-      openInvitation('#couple');
+      openInvitation('#couple', r);
     });
 
-    // ================== YOUR ORIGINAL SCRIPT (kept) ==================
-
-    // Reveal on scroll
+    // ================== REVEAL ON SCROLL ==================
     const observer = new IntersectionObserver((entries)=>{
       entries.forEach(e=>{
         if(e.isIntersecting){
@@ -1271,7 +1184,7 @@
 
     document.querySelectorAll('.card, .scroll, .shot').forEach(el => observer.observe(el));
 
-    // Scenario 1: Unfold scroll paper when visible
+    // Unfold scroll paper when visible
     const scrollEl = document.getElementById('paperScroll');
     const unfoldObs = new IntersectionObserver((entries)=>{
       entries.forEach(e=>{
